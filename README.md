@@ -139,3 +139,6 @@ Giải pháp mạng riêng ảo sử dụng mã nguồn mở OpenVPN cho phép c
 - OpenVPN không được xây dựng các tính năng để xử lý cân bằng tải, nhưng nó hoàn toàn giải quyết dc dễ dàng bằng cách sử dụng iptables.
     
 ![image](https://user-images.githubusercontent.com/62002485/138945631-2336f0be-ff8e-4f24-a132-82616b285879.png)
+
+![image](https://user-images.githubusercontent.com/62002485/138950207-c432dc2e-0a14-4c41-afeb-3a4c935dce61.png)
+
