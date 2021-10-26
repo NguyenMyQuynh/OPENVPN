@@ -63,9 +63,79 @@ Ngoài ra ta còn có thể sử dụng máy chủ AAA. AAA là viết tắt c�
   - `SSL VPN`
     - SSL VPN tạo kết nối giữa người dùng từ xa với máy chủ trong mạng chứa tài nguyên mạng công ty thông qua giao thức HTTPS ở lớp ứng dụng thay vì tạo “đường hầm” ở lớp mạng như giải pháp IPSec.
     -  Người dùng ở xa chỉ cần sử dụng một trình duyệt web để tạo kết nối vào máy chủ trong mạng, người quản trị không cần phải cài đặt phần mềm và cấu hình bảo mật cho các máy client như đối với IPSec.
+
+     #### GIAO THỨC BẢO MẬT SSL:
+     - Điểm cơ bản của SSL được thiết kế độc lập với tầng ứng dụng để đảm bảo tính bí mật, an toàn và chống giả mạo luồng thông tin qua Internet giữa hai ứng dụng bất kỳ, thí dụ như webserver và các trình duyệt khách (browsers).
+     - Toàn bộ cơ chế hoạt động và hệ thống thuật toán mã hoá sử dụng trong SSL được phổ biến công khai, trừ khoá chia xẻ tạm thời (session key) được sinh ra tại thời điểm trao đổi giữa hai ứng dụng là tạo ngẫu nhiên và bí mật đối với người quan sát trên mạng máy tính.
+     - Giao thức SSL dựa trên hai nhóm con giao thức là giao thức “bắt tay” (handshake protocol) và giao thức truyền dữ liệu (record protocol):
+        - Giao thức bắt tay xác định các tham số giao dịch giữa hai đối tượng có nhu cầu trao đổi thông tin hoặc dữ liệu.
+        - Giao thức truyền dữ liệu xác định khuôn dạng cho tiến hành mã hoá và truyền tin hai chiều giữa hai đối tượng đó.
+     - Giao thức bắt tay là giao thức quan trọng nhất của SSL , được hai phía sử dụng để xác thực lẫn nhau và thương lượng để thống nhất các thuật toán xác thực MAC và mã hoá.Thủ tục này cũng trao đổi khoá bí mật dung cho mã hoá và MAC. Thủ tục bắt tay phải thực hiện trước khi trao đổi dữ liệu. SSL handshake gồm 4 giai đọan (phase):
+
+  ```
+  Giai đoạn 1 :
+
+
+- ClientSSLthiết lậpmộtkếtnốiquagiao thức TCP và gửi tin nhắnClient_Hellođểbắtđầumột cái bắt tay.
+- Các máy chủSSLphản ứngvới một thông điệpSever_Hello.
+
+Thông báo của client_hello và server_hello bao gồm các trường sau đây:
+· client_hello = (version, random, session id, cipher suite, compression method)
+· server_hello = (version, random, session id, cipher suite,compression method)
+Trong đó:
+Ø Version : Phiên bản SSL
+Ø Random : Số ngẫu nhiên dùng cho mục đích xác thực.
+Ø session id : nhận dạng các phiên làm việc.
+Ø cipher suite:tập các thuật toán mật mã mà hệ thống có khả năng hỗ trợ
+Ø compression method : Thuật toán nén mà hệ thống có khả năng hổ trợ.
+
+Giai đoạn 2 :
+
+
+- Server gửi chứng chỉ Certificate của nó cho Client.
+- ServerKeyExchange: chứa thông tin về Public key của Server mà Client cần để xác thực Server.
+- Server yêu cầu Client gửi lại Certificate của Client bằng message Certificate_Request.
+- Server_hello_done: kết thúc thương lượng phía server
+
+Giai đoạn 3 :
+
+
+- Client gửi chứng chỉ Certificate của nó cho Server.
+- ClientKeyExchange: chứa thông tin về khóa của Client. Thông điệp này được mã hóa bằng chính Public key của Server. Chính sự mã hóa này bảo vệ thông tin về khóa của Client đồng thời xác thực luôn Server. Vì chỉ có Server mới có thể giải mã được thông điệp này.
+- CertificateVerify : là một chữ ký dựa trên thông điệp bắt tay trước bằng cách sử dụng private key của certificate client. Chữ ký này được xác minh bằng cách sử dụng public key của certificate client. Điều này cho phép Server biết rằng client truy cập đến private key của certificate và như vậy certificate thuộc quyền sở hữu của client.
+
+
+Giai đoạn 4 :
+
+Hình 3.7: Giao thức bắt tay SSL _Giai đoạn 4
+- Change_cipher_spec: cập nhật thông số mã
+- Finish: kết thúc quá trình bắt tay thành công
+
+Kết thức Giai đoạn 4 trong giao thức bắt tay SSL VPN là đã hoàn thành xong việc khởi tạo cho việc thiết lập đường hầm an toàn VPN. Sau đó thì trao đổi dữ liệu qua đường hầm
+```
     
-  - `OpenVPN`
+  <br>
+    
+  - `OpenVPN`: 
     - OpenVPN là một phần mềm mạng riêng ảo mã nguồn mở dành cho việc tạo các đường ống (tunnel) điểm-điểm được mã hóa giữa các máy tính.
     - OpenVPN cho phép các máy tính ngang hàng xác thực lẫn nhau bằng một khóa bí mật được chia sẻ từ trước, chứng chỉ khóa công khai (public key certificate), hoặc tên người dùng/mật khẩu. 
     - Toàn bộ phần mềm gồm có một file nhị phân cho cả các kết nối client và server và một hoặc nhiều file khóa tùy theo phương thức xác thực được sử dụng.
+    - Các kết nối OpenVPN có thể đi qua được hầu hết mọi tường lửa và proxy : Khi truy cập các trang web HTTPS, thì đường hầm OpenVPN làm việc.Việc thiết lập đường hầm OpenVPN bị cấm là rất hiếm. 
+    - Hỗ trợ UDP và TCP.
+    - Chỉ cần một cổng trong tường lửa được mở là cho phép nhiều kết nối vào: Kể từ phần mềm OpenVPN 2.0, máy chủ đặc biệt này cho phép nhiều kết nốivào trên cùng một cổng TCP hoặc UDP, đồng thời vẫn sử dụng các cấu hình khác nhau cho mỗi một kết nối.
+    - Hỗ trợ khả năng hoạt động cao, trong suốt cho IP động: Hai đầu đường hầm có thể sử dụng IP động và ít bị thay đổi. Nếu bị đổi IP, các phiên làm việc của Windows Terminal Server và Secure Shell (SSH) có thể chỉ bị ngưng trong vài giây và sẽ tiếp tục hoạt động bình thường.
+    - Cài đặt đơn giản trên bất kỳ hệ thống nào: Đơn giản hơn nhiều so với IPsec.
+    - Việc cài đặt mạng của clients có thể được điều khiển bởi sever. Sau khi hoàn thành cài đặt mạng của một đường hầm, sever có thể cho phép client ( cả Windows và Linux) sử dụng những sự cài đặt mạng khác nhau ngay lập tức.
+
+<br>
+
+### CÀI ĐẶT OPENVPN:
+Giải pháp mạng riêng ảo sử dụng mã nguồn mở OpenVPN cho phép các nhân viên thường đi công tác xa có thể ngồi bất kì nơi đâu có kết nối internet đều có thể truy cập vào các ứng dụng, dịch vụ của hệ thống mạng nội bộ trong công ty 1 cách an toàn và đảm bảo tính toàn vẹn của dữ liệu và thông tin người dùng. Với những tính năng ưu việt OpenVPN hỗ trợ cho người quản trị dễ dàng kiểm soát được những kết nối bất kì đâu. 
+- Trên Windows, OpenVPN cài đặt giống như bất kỳ chương trình khác.
+- Để tự động khởi động và dừng của OpenVPN, lúc khởi động lại sẽ cần phải chạy OpenVPN như là một dịch vụ Windows điều này cũng rất đơn giản.
+- Trên Linux cái đặt cũng rất đơn giản,hầu hết các bản phân phối đều có OpenVPn như một phần trong các gói hệ thống.
+- Nếu sử dụng nhân của hệ điều hành linux 2.4.x hoặc cao hơn thì OpenVPN đều được tích hợp sẵn các trình điều khiển. Nếu sử dụng thấp hơn, thì có thể tải về và cài đặt TAP / TUN trình điều khiển khá dễ dàng.
+- Tùy chọn pthreads. Tùy chọn này là rất quan trọng vì nó cho phép xử lý đa luồng để tạo ra một kênh điều khiển khác nhau mà trao đổi khóa được thực hiện. Thời gian rekeying mặc định là một giờ, do đó pthreads cho phép bạn loại bỏ độ trễ giờ rekeying qua một kênh riêng biệt và chuyển đổi sang các vật liệu keying mới một cách liền mạch.
+- OpenVPN không được xây dựng các tính năng để xử lý cân bằng tải, nhưng nó hoàn toàn giải quyết dc dễ dàng bằng cách sử dụng iptables.
     
+![image](https://user-images.githubusercontent.com/62002485/138945631-2336f0be-ff8e-4f24-a132-82616b285879.png)
