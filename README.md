@@ -154,6 +154,14 @@ Giải pháp mạng riêng ảo sử dụng mã nguồn mở OpenVPN cho phép c
 
 ![image](https://user-images.githubusercontent.com/62002485/139921266-8adeb229-9336-441b-b67e-b423dc9c59fc.png)
 
+- Network Adapter
+  - pfsense: ![image](https://user-images.githubusercontent.com/62002485/139945436-fd78bbfc-95b2-404c-b35f-828862921468.png)
+
+  - Win Server: ![image](https://user-images.githubusercontent.com/62002485/139945540-764d490a-72d2-401d-9435-ace75a64a05c.png)
+
+  - Win 10: ![image](https://user-images.githubusercontent.com/62002485/139945590-18717bee-c35c-447f-99b0-633d895bc0ed.png)
+
+
 ## pfSense 
 Là 1 firewall mã nguồn mở thịnh hành nhất hiện nay:
 https://www.pfsense.org/download/
