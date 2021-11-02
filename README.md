@@ -146,7 +146,7 @@ Giải pháp mạng riêng ảo sử dụng mã nguồn mở OpenVPN cho phép c
 
 # TRIỂN KHAI MÔ HÌNH CLIENT TO SITE:
 
-![image](https://user-images.githubusercontent.com/62002485/139847572-4fca99aa-ef89-4ea1-808c-3fab1ef15170.png)
+![image](https://user-images.githubusercontent.com/62002485/139863542-67d098cb-b089-4647-837f-00c6ed6f3204.png)
 
 ## pfSense 
 Là 1 firewall mã nguồn mở thịnh hành nhất hiện nay:
@@ -184,6 +184,13 @@ IP Card WAN sẽ cùng lớp mạng máy thật bên ngoài.
 
 ### Vào trang chủ pfsense để cài đặt:
 
+<i> **Note: Update new IP </i> 
+
+<br>
+
+![image](https://user-images.githubusercontent.com/62002485/139862227-ad13e385-d93e-4f76-a728-ea29c7af7ada.png)
+
+
 ![image](https://user-images.githubusercontent.com/62002485/139855304-072659e8-dea7-4f38-815a-9d736fc7a38e.png)
 
 - Tạo CA:
@@ -198,7 +205,11 @@ IP Card WAN sẽ cùng lớp mạng máy thật bên ngoài.
 
 ![image](https://user-images.githubusercontent.com/62002485/139847768-1bcced8c-6277-4e1f-998f-15d8227a4781.png)
 
+![image](https://user-images.githubusercontent.com/62002485/139908730-65f310fc-4736-4923-8dd7-5570019858f4.png)
+
 ![image](https://user-images.githubusercontent.com/62002485/139849849-cecdefd9-83d3-4cbc-8a4f-83e6bfaa3dd3.png)
+
+VD: push “route 172.16.0.0 255.255.255.0” (lệnh này sẽ đẩy route mạng 172.16.0.0 đến Client, hay còn gọi là Lan Routing trong Windows Server, giúp cho VPN Client thấy được mạng bên trong của công ty)
 
 ![image](https://user-images.githubusercontent.com/62002485/139849917-5a1e8cf8-5e1c-43cf-9255-61a98df64a9e.png)
 
@@ -210,6 +221,33 @@ IP Card WAN sẽ cùng lớp mạng máy thật bên ngoài.
 
 ![image](https://user-images.githubusercontent.com/62002485/139849109-232402f9-1a88-42db-9ae3-7cef6bf8bfec.png)
 
+![image](https://user-images.githubusercontent.com/62002485/139910486-b7ffde4d-6d7f-41ed-9862-40a7d75991f4.png)
+
+![image](https://user-images.githubusercontent.com/62002485/139910557-6ea50cce-4585-49e7-b609-09e366533353.png)
+
+- Vào tag Client Export, với option server Client To Site vừa tạo có sự xuất hiện của user vpn01, tiến hành tải file cấu hình về máy client:
+
+![image](https://user-images.githubusercontent.com/62002485/139915732-eb319a32-2ec5-4286-93d5-e170f5daf0c8.png)
+
+<i>**Ngoài cách cài VM Tool để kéo thả file, vì đã biết ip mặt ngoài WAN pfsense nên có thể thêm làm như sau: thêm Rules WAN, giữ tất cả giá trị theo mặc định, và chọn protocol là `Any`. Tải xong cần disable Rules.</i>
+
+- Chạy file cấu hình vừa tải được để `cài OpenVPN và import cấu hình đã cài đặt trên pfsense xuống`. (Win10 cần run as admin)
+- Thông thường tạo VPN theo port, hệ thống pfsense tự động tạo phần NAT để móc vào.
+- Vào Firewall -> NAT để check:
+![image](https://user-images.githubusercontent.com/62002485/139917494-1c8564de-0150-4260-ab5f-42fdd748e0cc.png)
+
+- Cần xem thêm card WAN đã tạo đường vpn ở đâu port nào thì ta sẽ tạo rules ngay đó trên card WAN.
+Phải mở Rules để port 600069 trên card WAN của pfsense mới đc mở và chúng ta có thể móc về.
+
+![image](https://user-images.githubusercontent.com/62002485/139922125-2a404b19-8d20-431a-8533-2acbaed81b99.png)
+
+- Tiến hành connect:
+
+![image](https://user-images.githubusercontent.com/62002485/139917844-ebedbb43-cc1b-4815-bb1a-a65722ae0c60.png)
+
+Sau khi thêm user vào openvpn server Client To Site thì file cấu hình có ip cấp cho client trong mạng tunnel, khi kết nối nhập đúng user pass thì kết nối đc đến vpn server và sau đó vpn server móc từ pfsense card WAN, tiến hành tạo đường hầm kết nối cho client vào mạng cục bộ phía trong pfsense.
+
+![image](https://user-images.githubusercontent.com/62002485/139921266-8adeb229-9336-441b-b67e-b423dc9c59fc.png)
 
 
 
