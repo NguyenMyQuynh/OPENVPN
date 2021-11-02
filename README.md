@@ -146,6 +146,8 @@ Giải pháp mạng riêng ảo sử dụng mã nguồn mở OpenVPN cho phép c
 
 # TRIỂN KHAI MÔ HÌNH CLIENT TO SITE:
 
+![image](https://user-images.githubusercontent.com/62002485/139943868-82567ee1-5baf-4704-9160-61bd4764635e.png)
+
 ![image](https://user-images.githubusercontent.com/62002485/139863542-67d098cb-b089-4647-837f-00c6ed6f3204.png)
 
 <i>Hiểu nôm na :D Sau khi thêm user vào openvpn server Client To Site thì file cấu hình có ip cấp cho client trong mạng tunnel, khi kết nối nhập đúng user pass thì kết nối đc đến vpn server và sau đó vpn server móc từ pfsense card WAN, tiến hành tạo đường hầm kết nối cho client vào mạng cục bộ phía trong pfsense.</i>
@@ -260,6 +262,8 @@ Phải mở Rules để port 600069 trên card WAN của pfsense mới đc mở 
 - Add thêm Rules LAN any 
 
 - Tắt firewall trên máy client và máy local công ty.
+
+
 
 
 
