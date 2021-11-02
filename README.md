@@ -148,6 +148,10 @@ Giải pháp mạng riêng ảo sử dụng mã nguồn mở OpenVPN cho phép c
 
 ![image](https://user-images.githubusercontent.com/62002485/139863542-67d098cb-b089-4647-837f-00c6ed6f3204.png)
 
+<i>Hiểu nôm na :D Sau khi thêm user vào openvpn server Client To Site thì file cấu hình có ip cấp cho client trong mạng tunnel, khi kết nối nhập đúng user pass thì kết nối đc đến vpn server và sau đó vpn server móc từ pfsense card WAN, tiến hành tạo đường hầm kết nối cho client vào mạng cục bộ phía trong pfsense.</i>
+
+![image](https://user-images.githubusercontent.com/62002485/139921266-8adeb229-9336-441b-b67e-b423dc9c59fc.png)
+
 ## pfSense 
 Là 1 firewall mã nguồn mở thịnh hành nhất hiện nay:
 https://www.pfsense.org/download/
@@ -236,18 +240,29 @@ VD: push “route 172.16.0.0 255.255.255.0” (lệnh này sẽ đẩy route m�
 - Vào Firewall -> NAT để check:
 ![image](https://user-images.githubusercontent.com/62002485/139917494-1c8564de-0150-4260-ab5f-42fdd748e0cc.png)
 
+- Tiến hành connect:
+
+![image](https://user-images.githubusercontent.com/62002485/139917844-ebedbb43-cc1b-4815-bb1a-a65722ae0c60.png)
+
+
 - Cần xem thêm card WAN đã tạo đường vpn ở đâu port nào thì ta sẽ tạo rules ngay đó trên card WAN.
 Phải mở Rules để port 600069 trên card WAN của pfsense mới đc mở và chúng ta có thể móc về.
 
 ![image](https://user-images.githubusercontent.com/62002485/139922125-2a404b19-8d20-431a-8533-2acbaed81b99.png)
 
-- Tiến hành connect:
 
-![image](https://user-images.githubusercontent.com/62002485/139917844-ebedbb43-cc1b-4815-bb1a-a65722ae0c60.png)
+- Cần add thêm interface OPENVPN và Openvpn any và enable:
 
-Sau khi thêm user vào openvpn server Client To Site thì file cấu hình có ip cấp cho client trong mạng tunnel, khi kết nối nhập đúng user pass thì kết nối đc đến vpn server và sau đó vpn server móc từ pfsense card WAN, tiến hành tạo đường hầm kết nối cho client vào mạng cục bộ phía trong pfsense.
+![image](https://user-images.githubusercontent.com/62002485/139924628-6940c2d4-f4f2-403d-9220-b6b3eb32bc5d.png)
 
-![image](https://user-images.githubusercontent.com/62002485/139921266-8adeb229-9336-441b-b67e-b423dc9c59fc.png)
+![image](https://user-images.githubusercontent.com/62002485/139924672-0af4be20-f38f-4c57-b560-e62b605d90d0.png)
+
+- Add thêm Rules LAN any 
+
+- Tắt firewall trên máy client và máy local công ty.
+
+
+
 
 
 
