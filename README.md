@@ -156,6 +156,10 @@ Mặc định khi push lên nếu có 2 card mạng thì pfsense sẽ xem card s
 
 ### Thực hiện cấu hình pfsense:
 
+IP Card WAN sẽ cùng lớp mạng máy thật bên ngoài.
+
+![image](https://user-images.githubusercontent.com/62002485/139860171-66e0f22f-672e-4a1e-a316-076b18c29f89.png)
+
 - Cấu hình chỉ định card mạng WAN LAN cho pfsense:
 
 ![image](https://user-images.githubusercontent.com/62002485/139852709-8c540b90-bf01-4988-a292-c68594664ef8.png)
@@ -178,7 +182,7 @@ Mặc định khi push lên nếu có 2 card mạng thì pfsense sẽ xem card s
 
 ![image](https://user-images.githubusercontent.com/62002485/139854930-cfb2c21e-1ed3-4042-a8f2-b58031404bcc.png)
 
-- Vào trang chủ pfsense để cài đặt:
+### Vào trang chủ pfsense để cài đặt:
 
 ![image](https://user-images.githubusercontent.com/62002485/139855304-072659e8-dea7-4f38-815a-9d736fc7a38e.png)
 
