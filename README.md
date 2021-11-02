@@ -146,12 +146,11 @@ Giải pháp mạng riêng ảo sử dụng mã nguồn mở OpenVPN cho phép c
 
 # TRIỂN KHAI MÔ HÌNH CLIENT TO SITE:
 
+![image](https://user-images.githubusercontent.com/62002485/139847572-4fca99aa-ef89-4ea1-808c-3fab1ef15170.png)
+
 ## pfSense 
 Là 1 firewall mã nguồn mở thịnh hành nhất hiện nay:
 https://www.pfsense.org/download/
-
-
-![image](https://user-images.githubusercontent.com/62002485/139847572-4fca99aa-ef89-4ea1-808c-3fab1ef15170.png)
 
 Mặc định khi push lên nếu có 2 card mạng thì pfsense sẽ xem card sử dụng DHCP như là card WAN.
 
