@@ -144,6 +144,70 @@ Giải pháp mạng riêng ảo sử dụng mã nguồn mở OpenVPN cho phép c
 
 <br>
 
+# TRIỂN KHAI MÔ HÌNH CLIENT TO SITE:
+
 ## pfSense 
 Là 1 firewall mã nguồn mở thịnh hành nhất hiện nay:
 https://www.pfsense.org/download/
+
+
+![image](https://user-images.githubusercontent.com/62002485/139847572-4fca99aa-ef89-4ea1-808c-3fab1ef15170.png)
+
+Mặc định khi push lên nếu có 2 card mạng thì pfsense sẽ xem card sử dụng DHCP như là card WAN.
+
+### Thực hiện cấu hình pfsense:
+
+- Cấu hình chỉ định card mạng WAN LAN cho pfsense:
+
+![image](https://user-images.githubusercontent.com/62002485/139852709-8c540b90-bf01-4988-a292-c68594664ef8.png)
+
+![image](https://user-images.githubusercontent.com/62002485/139852677-413fddbc-9975-4e93-8731-5242f664ab3a.png)
+
+- Setup IP address cho các interface pfsense:
+
+![image](https://user-images.githubusercontent.com/62002485/139853351-7fff8340-724b-4b6d-b003-7d7811887c98.png)
+
+![image](https://user-images.githubusercontent.com/62002485/139853297-574f67c4-b1f0-4249-aa08-905c52ab1ed3.png)
+
+![image](https://user-images.githubusercontent.com/62002485/139854105-c6a269d5-1943-4b66-8779-41db2c20d55d.png)
+
+![image](https://user-images.githubusercontent.com/62002485/139854424-faf63510-22fa-473e-bf2f-e0825cac44f4.png)
+
+![image](https://user-images.githubusercontent.com/62002485/139856166-865048ad-0a16-469b-9959-a35a9b511b52.png)
+
+- Cập nhật IP cho Windows Server 2019 (Mạng cục bộ):
+
+![image](https://user-images.githubusercontent.com/62002485/139854930-cfb2c21e-1ed3-4042-a8f2-b58031404bcc.png)
+
+- Vào trang chủ pfsense để cài đặt:
+
+![image](https://user-images.githubusercontent.com/62002485/139855304-072659e8-dea7-4f38-815a-9d736fc7a38e.png)
+
+- Tạo CA:
+
+![image](https://user-images.githubusercontent.com/62002485/139848115-41c615d4-11a3-481a-98d3-61163d48fcaa.png)
+
+- Tạo server Certificate:
+
+![image](https://user-images.githubusercontent.com/62002485/139848388-3553cec9-abaa-44b5-9ebb-b2a5e6d2278d.png)
+
+- Tạo server VPN:
+
+![image](https://user-images.githubusercontent.com/62002485/139847768-1bcced8c-6277-4e1f-998f-15d8227a4781.png)
+
+![image](https://user-images.githubusercontent.com/62002485/139849849-cecdefd9-83d3-4cbc-8a4f-83e6bfaa3dd3.png)
+
+![image](https://user-images.githubusercontent.com/62002485/139849917-5a1e8cf8-5e1c-43cf-9255-61a98df64a9e.png)
+
+- Kiểm tra server đã tạo ở tag export client:
+
+![image](https://user-images.githubusercontent.com/62002485/139848922-be3bafd5-57f7-4127-a71b-d01a1c00ff0f.png)
+
+- Tạo user sử dụng certificate đã tạo:
+
+![image](https://user-images.githubusercontent.com/62002485/139849109-232402f9-1a88-42db-9ae3-7cef6bf8bfec.png)
+
+
+
+
+
