@@ -255,6 +255,9 @@ VD: push “route 172.16.0.0 255.255.255.0” (lệnh này sẽ đẩy route m�
 ![image](https://user-images.githubusercontent.com/62002485/139917844-ebedbb43-cc1b-4815-bb1a-a65722ae0c60.png)
 
 
+![image](https://user-images.githubusercontent.com/62002485/143025020-a753a5dd-583a-4f28-ac6b-6ba83c92f2e3.png)
+
+
 - Cần xem thêm card WAN đã tạo đường vpn ở đâu port nào thì ta sẽ tạo rules ngay đó trên card WAN.
 Phải mở Rules để port 600069 trên card WAN của pfsense mới đc mở và chúng ta có thể móc về.
 
