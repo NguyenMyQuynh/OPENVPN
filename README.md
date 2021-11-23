@@ -264,7 +264,7 @@ Phải mở Rules để port 600069 trên card WAN của pfsense mới đc mở 
 ![image](https://user-images.githubusercontent.com/62002485/139922125-2a404b19-8d20-431a-8533-2acbaed81b99.png)
 
 
-- Cần add thêm interface OPENVPN và Openvpn any và enable:
+- Cần add thêm network port của VPN(interface VPN) và thêm rules với destination là alias mặt ngoài pfsense (hoặc any :v) cho interface đó:
 
 ![image](https://user-images.githubusercontent.com/62002485/139924628-6940c2d4-f4f2-403d-9220-b6b3eb32bc5d.png)
 
