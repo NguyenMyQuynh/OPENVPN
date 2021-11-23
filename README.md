@@ -276,7 +276,7 @@ Phải mở Rules để port 600069 trên card WAN của pfsense mới đc mở 
 
 [Video](https://www.youtube.com/watch?v=UxjqHRUEIz8)
 
-
+<br>
 
 # TRIỂN KHAI MÔ HÌNH OpenVPN site- to- site trên Pfsense
 
